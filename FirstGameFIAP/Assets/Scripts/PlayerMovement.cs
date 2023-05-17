@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isOnGround = true;
 
-        if(collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             StartCoroutine(DestroyPlayer());
         }
@@ -48,13 +48,16 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator DestroyPlayer()
     {
         Color c = GetComponent<Renderer>().material.color;
-        for (float alpha = 1f; alpha >=0; alpha -= 0.1f)
+        for (float alpha = 1f; alpha >= 0; alpha -= 0.1f)
         {
             c.a = alpha;
             GetComponent<Renderer>().material.color = c;
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.02f);
         }
-        Destroy(gameObject);
+
+        playerTransform.position = new Vector3 (0, 0, 0);
+        c.a = 1;
+
     }
 
 }
