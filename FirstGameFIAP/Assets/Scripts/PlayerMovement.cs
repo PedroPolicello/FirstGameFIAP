@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance;
     private Transform playerTransform;
     private Rigidbody2D playerRig;
     private bool isOnGround = true;
@@ -14,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         playerRig = GetComponent<Rigidbody2D>();
         playerTransform = GetComponent<Transform>();
     }

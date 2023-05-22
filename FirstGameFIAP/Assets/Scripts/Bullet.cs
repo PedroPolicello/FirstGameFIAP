@@ -5,7 +5,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float bulletLifeTime = 1f;
+
+    private void Start()
+    {
+        StartCoroutine(LifeTime());
+    }
 
     void Update()
     {
@@ -13,7 +17,15 @@ public class Bullet : MonoBehaviour
     }
     IEnumerator LifeTime()
     {
-        yield return new WaitForSeconds(bulletLifeTime);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
     }
 }
